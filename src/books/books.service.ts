@@ -2,6 +2,7 @@ import BookEntity from '../db/entity/book.entity';
 import CreateBookDto from '../dto/create-book.dto';
 import UserEntity from '../db/entity/user.entity';
 import GenreEntity from '../db/entity/genre.entity';
+import UpdateBookDto from '../dto/update-book.dto';
 
 export class BooksService {
   async insert(bookDetails: CreateBookDto): Promise<BookEntity> {
@@ -24,7 +25,26 @@ export class BooksService {
   }
 
   async delete(bookId: number): Promise<any> {
-    const book = await BookEntity.findOne(bookId);
+    const book = await BookEntity.findOneOrFail(bookId);
     return BookEntity.remove(book);
+  }
+
+  async update(book: UpdateBookDto): Promise<any> {
+    const originalBook = await BookEntity.findOneOrFail(book.id);
+    if (book.genreIDs) {
+      originalBook.genres = [];
+      for (let i = 0; i < book.genreIDs.length; i++) {
+        const genre = await GenreEntity.findOne(book.genreIDs[i]);
+        originalBook.genres.push(genre);
+      }
+    }
+    if (book.name) {
+      originalBook.name = book.name;
+    }
+    if (book.userID) {
+      originalBook.user = await UserEntity.findOneOrFail(book.userID);
+    }
+
+    return originalBook.save();
   }
 }

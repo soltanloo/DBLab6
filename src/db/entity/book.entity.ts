@@ -21,7 +21,7 @@ export default class BookEntity extends BaseEntity {
   @ManyToOne(() => UserEntity, (user) => user.books, { onDelete: 'CASCADE' })
   user: UserEntity;
 
-  @ManyToMany(() => GenreEntity)
+  @ManyToMany(() => GenreEntity, { onUpdate: 'CASCADE' })
   @JoinTable()
   genres: GenreEntity[];
 }

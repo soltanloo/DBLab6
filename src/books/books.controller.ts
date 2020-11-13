@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { BooksService } from './books.service';
 import CreateBookDto from '../dto/create-book.dto';
 import DeleteBookDto from '../dto/delete-book.dto';
+import UpdateBookDto from '../dto/update-book.dto';
 
 @Controller('books')
 export class BooksController {
@@ -24,5 +25,10 @@ export class BooksController {
   @Delete('delete')
   removeBook(@Body() book: DeleteBookDto) {
     return this.booksService.delete(book.id);
+  }
+
+  @Put('update')
+  updateBook(@Body() book: UpdateBookDto) {
+    return this.booksService.update(book);
   }
 }
