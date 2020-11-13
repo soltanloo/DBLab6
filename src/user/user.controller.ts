@@ -13,13 +13,9 @@ import CreateUserDto from '../dto/create-user.dto';
 import { ApiBearerAuth, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 200, description: 'New user created successfully' })
   @Post('post')
   postUser(@Body() user: CreateUserDto) {
