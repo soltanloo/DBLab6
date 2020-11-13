@@ -8,10 +8,4 @@ export default class CreateUserDto {
     maxLength: 25,
   })
   readonly name: string;
-
-  @ApiProperty({
-    description: 'Books IDs',
-    default: [],
-  })
-  readonly books: number[];
 }
