@@ -8,4 +8,16 @@ export default class CreateUserDto {
     maxLength: 25,
   })
   readonly name: string;
+  @ApiProperty({
+    description: 'Username',
+    minLength: 5,
+    maxLength: 30,
+  })
+  readonly username: string;
+  @ApiProperty({
+    description: 'Password',
+    minLength: 5,
+    maxLength: 30,
+  })
+  readonly password: string;
 }
