@@ -17,4 +17,11 @@ export default class BookEntity extends BaseEntity {
 
   @Column({ length: 500 })
   name: string;
+
+  @ManyToOne(() => UserEntity, (user) => user.books)
+  user: UserEntity;
+
+  @ManyToMany(() => GenreEntity)
+  @JoinTable()
+  genres: GenreEntity[];
 }
