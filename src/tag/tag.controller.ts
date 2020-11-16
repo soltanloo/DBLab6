@@ -6,7 +6,7 @@ import CreateTagDto from '../dto/create-tag.dto';
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller('category')
+@Controller('tag')
 export default class TagController {
   constructor(private readonly tagService: TagService) {}
   @ApiBearerAuth()
