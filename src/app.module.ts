@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HelloModule } from './hello/hello.module';
-import { BooksModule } from './books/books.module';
-import { GenreModule } from './genre/genre.module';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
@@ -11,16 +9,22 @@ import { TodoModule } from './todo/todo.module';
 import { CategoryModule } from './category/category.module';
 import { TagModule } from './tag/tag.module';
 import UserEntity from './db/entity/user.entity';
-import BookEntity from './db/entity/book.entity';
-import GenreEntity from './db/entity/genre.entity';
+import TagEntity from './db/entity/tag.entity';
+import CategoryEntity from './db/entity/category.entity';
+import TodoEntity from './db/entity/todo.entity';
+import TodoItemEntity from './db/entity/todo-item.entity';
 
 @Module({
   imports: [
     HelloModule,
-    BooksModule,
-    GenreModule,
     UserModule,
-    TypeOrmModule.forFeature([UserEntity, BookEntity, GenreEntity]),
+    TypeOrmModule.forFeature([
+      UserEntity,
+      TagEntity,
+      CategoryEntity,
+      TodoEntity,
+      TodoItemEntity,
+    ]),
     TypeOrmModule.forRoot(),
     AuthModule,
     TodoModule,
