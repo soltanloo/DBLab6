@@ -21,8 +21,8 @@ export default class TodoEntity extends BaseEntity {
   @Column()
   title: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
   @Column()
   type: 'List' | 'Text';
